@@ -1,19 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+// Импорт QueryClient и провайдера из React Query
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+// Создаем экземпляр QueryClient для управления кэшем и запросами
+const queryClient = new QueryClient();
+
+// Получаем элемент для рендеринга приложения
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+
+// Рендерим приложение, оборачивая его в QueryClientProvider
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <React.StrictMode>
+        <QueryClientProvider client={queryClient}>
+            <App />
+        </QueryClientProvider>
+    </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
